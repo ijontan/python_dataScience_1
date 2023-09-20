@@ -12,3 +12,4 @@ def ft_load(path: str) -> np.ndarray:
         return img_arr
     except Exception as e:
         print("Exception: ", e)
+        return None
