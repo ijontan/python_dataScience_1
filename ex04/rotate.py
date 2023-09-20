@@ -19,19 +19,45 @@ def ft_zoom(file: np.ndarray, new_shape: tuple) -> np.ndarray:
         return new_file
     except Exception as e:
         print("Exception: ", e)
+        return None
+
+
+def ft_rotate(file: np.ndarray, angle: int) -> np.ndarray:
+    """ft_rotate"""
+    possible_rotations = [0, 90, 180, 270]
+    try:
+        assert angle in possible_rotations, "angle must be 0, 90, 180 or 270"
+        if angle == 0:
+            return file
+        elif angle == 90 or angle == -270:
+            return np.transpose(file, axes=(1, 0, 2))[::-1]
+        elif angle == 180 or angle == -180:
+            return file[::-1, ::-1]
+        elif angle == 270 or angle == -90:
+            return np.transpose(file, axes=(1, 0, 2))[:, ::-1]
+    except Exception as e:
+        print("Exception: ", e)
+        return None
 
 
 def main():
     """main"""
     try:
         file = ft_load("animal.jpeg")
-        print(file)
+        if file is None:
+            return
         zoomed = ft_zoom(file, (450, 100, 400, 400))
-        if zoomed is not None:
-            print("New shape after slicing :", zoomed.shape)
-            print(zoomed)
-            plt.imshow(zoomed)
-            plt.show()
+        if zoomed is None:
+            return
+        print("Shape of image is :", zoomed.shape)
+        print(zoomed)
+        rotated = ft_rotate(zoomed, 90)
+        if rotated is None:
+            return
+        print("Shape after rotate is :", rotated.shape)
+        print(rotated)
+        plt.imshow(rotated)
+        plt.show()
     except KeyboardInterrupt:
         print("KeyboardInterrupt..")
 
