@@ -59,7 +59,7 @@ def main():
         plt.imshow(rotated)
         plt.show()
     except KeyboardInterrupt:
-        print("KeyboardInterrupt..")
+        print("\b\bKeyboardInterrupt..")
 
 
 if __name__ == "__main__":

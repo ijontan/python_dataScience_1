@@ -33,7 +33,7 @@ def main():
             plt.imshow(zoomed)
             plt.show()
     except KeyboardInterrupt:
-        print("KeyboardInterrupt..")
+        print("\b\bKeyboardInterrupt..")
 
 
 if __name__ == "__main__":
