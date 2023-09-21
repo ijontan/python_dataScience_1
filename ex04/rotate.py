@@ -3,6 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def ft_transpose(file: np.ndarray) -> np.ndarray:
+    width, height, _ = file.shape
+
+    ret = np.zeros((width, height, 3), dtype=np.uint8)
+    for i in range(width):
+        for j in range(height):
+            ret[i, j, :] = file[j, i, :]
+    return ret
+
+
 def ft_zoom(file: np.ndarray, new_shape: tuple) -> np.ndarray:
     """ft_zoom"""
     try:
@@ -30,11 +40,11 @@ def ft_rotate(file: np.ndarray, angle: int) -> np.ndarray:
         if angle == 0:
             return file
         elif angle == 90 or angle == -270:
-            return np.transpose(file, axes=(1, 0, 2))[::-1]
+            return ft_transpose(file)[::-1]
         elif angle == 180 or angle == -180:
             return file[::-1, ::-1]
         elif angle == 270 or angle == -90:
-            return np.transpose(file, axes=(1, 0, 2))[:, ::-1]
+            return ft_transpose(file)[:, ::-1]
     except Exception as e:
         print("Exception: ", e)
         return None
@@ -51,7 +61,7 @@ def main():
             return
         print("Shape of image is :", zoomed.shape)
         print(zoomed)
-        rotated = ft_rotate(zoomed, 90)
+        rotated = ft_rotate(zoomed, 270)
         if rotated is None:
             return
         print("Shape after rotate is :", rotated.shape)
