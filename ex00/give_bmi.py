@@ -12,7 +12,7 @@ def give_bmi(height: list[int | float],
         assert h_array.dtype in types, "type of height must be int or float"
         assert w_array.dtype in types, "type of weight must be int or float"
         assert h_array.size == w_array.size, "both list must be same size"
-        return (w_array / (h_array / 100) ** 2).tolist()
+        return (w_array / (h_array ** 2)).tolist()
     except Exception as e:
         raise e
 
